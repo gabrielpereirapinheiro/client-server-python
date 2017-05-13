@@ -8,6 +8,10 @@ Os sites abaixo possuem pseudocodigos do funcionamento do GBN
 Sites de apoio: https://gist.github.com/Rinnejade/60b876c6b1eda277fa205e1237eb9032
 				https://en.wikipedia.org/wiki/Go-Back-N_ARQ
 
+
+O site abaixo possui como usar os metodos settimeout e gettimeout do socket:
+https://docs.python.org/2/library/socket.html
+
 Baseado nos slides do Kurose, capitulo 3. Mais especificamente, as FSM, nos slides 47 e 48.
 
 Tem outras funcoes auxiliares a serem definidas. Ou seja, essas especificacoes sao para o funcionamento geral do GO-BACK-N

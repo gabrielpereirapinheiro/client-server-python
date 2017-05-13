@@ -31,7 +31,11 @@ message = raw_input('Input lowercase sentence:')
 
 string_list = message_assembler(message, len(message))
 print string_list
-clientSocket.sendto(message,(serverName, serverPort)) 
+
+for i in range(0,len(message)):
+	clientSocket.sendto(string_list[i],(serverName,serverPort))
+
+#clientSocket.sendto(message,(serverName, serverPort)) 
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048) 
 print modifiedMessage
 print serverAddress

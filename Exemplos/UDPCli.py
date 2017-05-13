@@ -6,4 +6,5 @@ message = raw_input('Input lowercase sentence:')
 clientSocket.sendto(message,(serverName, serverPort)) 
 modifiedMessage, serverAddress = clientSocket.recvfrom(2048) 
 print modifiedMessage
+print serverAddress
 clientSocket.close()

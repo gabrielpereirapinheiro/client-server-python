@@ -11,9 +11,26 @@ def show_index(message):
 	print message[0]
 
 #This fuction going to create the ack + valid
-def create_respost(message,valid):
+def create_respost(message,list_msg):
 
+	new_list = []
+	list_aux = []
+	valid = '0'
 	new_list = message.split()
+
+	size = len(list_msg)
+	
+	if(size>1):
+		x = list_msg[size-1]
+		y = list_msg[size-2]
+
+
+		nx = int(x)
+		ny = int(y)
+
+		#if(nx-1!=ny):
+		#	valid = '-1'
+					
 
 	ack = new_list[0]+' '+valid
 
@@ -76,15 +93,18 @@ list_of_index = []
 #Create a new list to save the acks was envied
 list_of_ack = []
 
+aux_list = []
+
 while 1:
 	#Recive the message from cliente
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
     #show_index(message)
-    
+   	
     present_in_list = check_index_recive(message,list_of_index)
 
     if(present_in_list==0):
+
 	    #Save the index
 	    list_of_index.append(message[0])
 
@@ -93,13 +113,14 @@ while 1:
 	    list_of_message.append(message[len(message)-3])
 	    
 	    #Create the answer to send to client
-	    respost = create_respost(message,'0')
+	    respost = create_respost(message,list_of_index)
 
 	    #Save the ack before is send
 	    list_of_ack.append(respost)
 
 	    #print 'valor --->'+ message[len(message)-1]
 
+	    last_index = message[0]
 	    #If was the last package
 	    if(message[len(message)-1] == '0'):
 	    	#Show the complete message
@@ -115,12 +136,13 @@ while 1:
 	    	#clean_lists(list_of_index,list_of_message,list_of_ack)
 
 	    	#Clean al lists
+	    	
 	    	list_of_message = []
 	    	list_of_ack=[]
 	    	list_of_index=[]
     else:
 
-    	respost = create_respost(message,'0')
+    	respost = create_respost(message,list_of_index)
 
     	if(message[len(message)-1] == '0'):
 	    	#Show the complete message
@@ -134,9 +156,9 @@ while 1:
 	    		print 'Erro, the message is not completed'
 
 	    	#clean_lists(list_of_index,list_of_message,list_of_ack)	
-
-	    	
-	    	list_of_message = []
+			
+		   	list_of_message = []
 	    	list_of_ack=[]
 	    	list_of_index=[]
+
     serverSocket.sendto(respost, clientAddress)	

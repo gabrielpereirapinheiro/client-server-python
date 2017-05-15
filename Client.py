@@ -25,11 +25,11 @@ def message_assembler(input_string, string_size):
 def message_disassembler(received_message):
 	list_substring = [] # vai receber todas as substring que tem na mensagem
 	list_substring = received_message.split()
-	print list_substring[0], list_substring[1]
 	rcv_ack = int(list_substring[0]) # o primeiro elemento da mensagem eh o ack
 	rcv_validation = int(list_substring[1]) # o ultimo elemento da mensagem eh o valor de validacao
 
 	return rcv_ack, rcv_validation
+
 
 
 def main():
@@ -40,7 +40,7 @@ def main():
 	msg_size = len(message) # tamanho da string digitada
 
 	# Declaracao das variaveis de controle do GBN
-	window_size = 4
+	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
 	window_base = 0
 	window_max = window_size
@@ -48,6 +48,11 @@ def main():
 	nack = 0 # inicializando o nack como 0
 	queue_ack = [] #vai ser a fila que contera os ACKs recebidos ate agora pelo cliente
 	queue_nack = [] # vai ser a fila que contera os NACKS recebidos
+	
+	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
+	#para testar casos de perda
+	destroy_message = -1 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
 															# para o servidor
@@ -58,29 +63,37 @@ def main():
 				
 			if window_base == seq_number:
 				#colocar aqui a logica do timeout
+				queue_ack = [] # sempre inicializa a fila de acks
 				for i in range(window_base, window_max):
+					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
+					#envio da mensagem
+					if i == destroy_message and i < window_max-1:
+						continue
+
 					seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
+					print 'Esta sendo enviado o pacote:', message_list[i]
 					clientSocket.sendto(message_list[i],(serverName, serverPort)) 
 
-			
+				print 'Pacotes de', window_base, 'ao', window_max-1, 'enviados', '\n'
+
+
 			received_message, serverAddress = clientSocket.recvfrom(2048)
-			#print received_message
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
-			#print ack
+			
 			#se tiver tido erro, coloca ack na fila de nacks, senao coloca ack na fila de ack
 			if rcv_validation == -1:
 				queue_nack.append(ack) # colocar na fila qualquer ack que nao foi recebido
 			else:
 				queue_ack.append(ack) # colocar na fila os acks que foram recebidos corretamente
 
-			#se o ack for o sequencenumber - 1, quer dizer que o ultimo ack que deveria ser entregue chegou
-			#if(ack == seq_number-1):
-
 			#se a fila de nack nao for vazia, quer dizer que houve erro na transmissao
 			if queue_nack != []:
+				print 'Foi perdido o pacote:', queue_nack[0]
+				print 'Reenviando'
 				nack = queue_nack[0] # vai receber o primeiro elemento da lista, ou seja, o primeiro da fila
 				queue_nack = []
 				ack = nack
+				seq_number = ack # sequence number tambem recebe o ack que foi perdido
 				window_base = ack
 				window_max = ack + window_size
 			else:
@@ -90,13 +103,7 @@ def main():
 			if window_max > msg_size:
 				window_max = msg_size
 
-	
-
 	clientSocket.close()
-	#clientSocket.sendto(message,(serverName, serverPort)) 
-	#modifiedMessage, serverAddress = clientSocket.recvfrom(2048) 
-	#print modifiedMessage
-	#print serverAddress
 	
 
 

@@ -52,37 +52,43 @@ def main():
 	#Enquanto o ACK nao for o valor do ultimo indice da mensagem, envia a mensagem
 	#Quando for, o loop para, e quer dizer que toda a mensagem foi enviada com sucesso
 	while ack != msg_size - 1:
-		try:		
+				
 			if window_base == seq_number:
-				#clientSocket.settimeout(10) # timeout de 10 segundos
+				#colocar aqui a logica do timeout
 				for i in range(window_base, window_max):
 					seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
+					print message_list[i]
 					clientSocket.sendto(message_list[i],(serverName, serverPort)) 
 
 			
 			received_message, serverAddress = clientSocket.recvfrom(2048)
-			print received_message
+			#print received_message
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
+			#se tiver tido erro, coloca ack na fila de nacks, senao coloca ack na fila de ack
 			if rcv_validation == -1:
 				queue_nack.append(ack) # colocar na fila qualquer ack que nao foi recebido
 			else:
 				queue_ack.append(ack) # colocar na fila os acks que foram recebidos corretamente
 
-			if(ack == seq_number-1):
-				clientSocket.settimeout(None)
-				if queue_nack != []:
-					nack = queue_nack[0] # vai receber o primeiro elemento da lista, ou seja, o primeiro da fila
-					queue_nack = []
-					ack = nack
+			#se o ack for o sequencenumber - 1, quer dizer que o ultimo ack que deveria ser entregue chegou
+			#if(ack == seq_number-1):
 
-			window_max += (ack+1 - window_base)
+			#se a fila de nack nao for vazia, quer dizer que houve erro na transmissao
+			if queue_nack != []:
+				nack = queue_nack[0] # vai receber o primeiro elemento da lista, ou seja, o primeiro da fila
+				queue_nack = []
+				ack = nack
+				window_base = ack
+				window_max = ack + window_size
+			else:
+				window_max += (ack+1 - window_base)
+				window_base = ack + 1
+
 			if window_max > msg_size:
 				window_max = msg_size
+				print 'max',window_max
 
-			window_base = ack + 1
-
-		except timeout:
-			print 'timeout!'
+	
 
 	clientSocket.close()
 	#clientSocket.sendto(message,(serverName, serverPort)) 

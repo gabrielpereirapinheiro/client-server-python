@@ -14,23 +14,21 @@ def show_index(message):
 def create_respost(message,list_msg):
 
 	new_list = []
-	list_aux = []
+	
 	valid = '0'
 	new_list = message.split()
-
 	size = len(list_msg)
+
+	valor = new_list[0]
+
+	valor = int(valor)
 	
-	if(size>1):
-		x = list_msg[size-1]
-		y = list_msg[size-2]
-
-
-		nx = int(x)
-		ny = int(y)
-
-		#if(nx-1!=ny):
-		#	valid = '-1'
-					
+	if(size>0):				
+		valor = int(valor)
+		aux = int(list_msg[size-1])
+		
+		if(valor-1 != aux):
+			valid = '-1'
 
 	ack = new_list[0]+' '+valid
 
@@ -102,63 +100,73 @@ while 1:
     #show_index(message)
    	
     present_in_list = check_index_recive(message,list_of_index)
+    aux_list = message.split()
+    #print aux_list[0]
 
     if(present_in_list==0):
 
-	    #Save the index
-	    list_of_index.append(message[0])
-
-	    #Save the message
-	    #-3 is to find the message in the vector based in the end.
-	    list_of_message.append(message[len(message)-3])
-	    
+	 
 	    #Create the answer to send to client
 	    respost = create_respost(message,list_of_index)
 
-	    #Save the ack before is send
-	    list_of_ack.append(respost)
+	    status_respost = respost[len(respost)-1]
 
-	    #print 'valor --->'+ message[len(message)-1]
+	    if(status_respost== '0'):
+		    
 
-	    last_index = message[0]
-	    #If was the last package
-	    if(message[len(message)-1] == '0'):
-	    	#Show the complete message
-	    	print list_of_message
-	    	last = int(message[0])
+	       #Save the index
+		    list_of_index.append(aux_list[0])
 
-	    	#Check recive the value of status on fuction
-	    	check =check_list_index(list_of_index,last)	
-	    	
-	    	#If the value is -1, show error to user
-	    	if(check== -1):
-	    		print 'Erro, the message is not completed'
-	    	#clean_lists(list_of_index,list_of_message,list_of_ack)
+		    #Save the message
+		    #-3 is to find the message in the vector based in the end.
+		    list_of_message.append(message[len(message)-3])
+		    
+		    
+		    #Save the ack before is send
+		    list_of_ack.append(respost)
 
-	    	#Clean al lists
-	    	
-	    	list_of_message = []
-	    	list_of_ack=[]
-	    	list_of_index=[]
-    else:
+		    #print 'valor --->'+ message[len(message)-1]
 
-    	respost = create_respost(message,list_of_index)
+		    last_index = message[0]
+		    #If was the last package
+		    if(message[len(message)-1] == '0'):
+		    	#Show the complete message
+		    	print list_of_message
 
-    	if(message[len(message)-1] == '0'):
-	    	#Show the complete message
-	    	last = int(message[0])
+		    	last = int(message[0])
 
-	    	#Check recive the value of status on fuction
-	    	check =check_list_index(list_of_index,last)	
-	    	
-	    	#If the value is -1, show error to user
-	    	if(check== -1):
-	    		print 'Erro, the message is not completed'
+		    	#Check recive the value of status on fuction
+		    	check =check_list_index(list_of_index,last)	
+		    	
+		    	#If the value is -1, show error to user
+		    	if(check== -1):
+		    		print 'Erro, the message is not completed'
+		    	#clean_lists(list_of_index,list_of_message,list_of_ack)
 
-	    	#clean_lists(list_of_index,list_of_message,list_of_ack)	
-			
-		   	list_of_message = []
-	    	list_of_ack=[]
-	    	list_of_index=[]
+		    	#Clean al lists
+		 			
+		    	list_of_message = []
+		    	list_of_ack=[]
+		    	list_of_index=[]
+	    else:
+
+	    	respost = create_respost(message,list_of_index)
+
+	    	if(message[len(message)-1] == '0'):
+		    	#Show the complete message
+		    	last = int(message[0])
+
+		    	#Check recive the value of status on fuction
+		    	check =check_list_index(list_of_index,last)	
+		    	
+		    	#If the value is -1, show error to user
+		    	if(check== -1):
+		    		print 'Erro, the message is not completed'
+
+		    	#clean_lists(list_of_index,list_of_message,list_of_ack)	
+
+			   	list_of_message = []
+		    	list_of_ack=[]
+		    	list_of_index=[]
 
     serverSocket.sendto(respost, clientAddress)	

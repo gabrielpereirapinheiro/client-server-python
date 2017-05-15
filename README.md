@@ -29,3 +29,20 @@ rdt_rcv(): Funcao vai receber os pacotes do servidor/receiver, se nao tiverem er
 SERVER/RECEIVER
 
 rdt_rcv(): Funcao que vai receber o pacote, verificar se nao tem erro e verificar se o sequence number eh valido. Se tudo estiver OK, vai montar o pacote ACK, com o numero do pacote que recebeu e o numero do pacote que espera. Envia esse pacote para o SENDER.
+
+
+__________________________________________________________________________________________
+RElatório:
+
+Teleinformática e redes 2 
+
+
+Implementação do Servidor
+
+
+
+	A implementação do servidor consistiu em adapatar o exemplo dado pelo professor para atender os requistios pedidos.
+	Primeiramente foram  criadas 3 ( três ) listas que irão salvar as partes da mensagem que for recebida, o index recebido da mensagem e a ultima lista é gerada a partir das respostas que o servidor está enviado para o cliente.
+	É verificado se o index recebido não está presente na lista de index para saber se não é apenas o cliente forçando o servidor a reenviar o index caso o ack não tenha chegado a ele. O ack é gerado pela função “create_respost”.
+	Essa resposta é gerada com a funçaõ “create_repost” que possui como parametros a mensagem completa que foi enviada pelo servidor e a validade dela que é gerada pela funçaõ de validae. A função concatena o index recebido com um espaço ‘ ’ e mais um bit de validade para inforamar se houve erro no envio da mensagem, isto é, se caso ela tenha chegado com um valor inválido, diferente do que deveria ser.
+	É enviado ao cliente o ack , quando o servidor receber uma mensagem e na flag dela estiver 0, indicará que é a ultima mensagem do cliente para o servidor, com isso o servidor faz uma verificação na lista de index recebido para conferir que todos tenham sidos recebidos e imprime na tela a mensagem que foi recebida, isto é, o que cada pacote possuia.

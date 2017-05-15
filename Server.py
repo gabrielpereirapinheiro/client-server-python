@@ -51,13 +51,7 @@ def check_index_recive(message,list):
 				valor = int(message[1])
 				valor_aux = int(message[0])
 				valor = valor + 10*valor_aux	
-			if(len(message)==7):
-				valor = int(message[2])
-				valor_aux = int(message[1])
-				valor = valor + 10*valor_aux
-				valor_aux = int(message[0])
-				valor = valor + 100*valor_aux	
-
+			
 			if(valor==index):
 				status = -1
 
@@ -106,8 +100,8 @@ while 1:
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
     #show_index(message)
-
-    #print message
+    print 'mensagrm'
+    print message
 
     present_in_list = check_index_recive(message,list_of_index)
 

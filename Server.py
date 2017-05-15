@@ -12,7 +12,12 @@ def show_index(message):
 
 #This fuction going to create the ack + valid
 def create_respost(message,valid):
-	ack = message[0]+' '+valid
+
+	new_list = message.split()
+
+
+	ack = new_list[0]+' '+valid
+
 
 	return ack
 
@@ -23,10 +28,9 @@ def return_value(message):
 	size = size - 4
 
 def clean_lists(index,msg,ack):
-	list_void = []
-	index = list_void
-	msg = list_void
-	ack = list_void
+	index = []
+	msg = []
+	ack = []
 
 	print 'limpando listas'
 	print index
@@ -41,7 +45,7 @@ def check_index_recive(message,list):
 	size = len(message)-5
 
 	if(len(list)!= 0):
-
+		
 		for i in range(0,len(list)):
 			index=int(list[i])
 			if(len(message)==5):
@@ -100,9 +104,7 @@ while 1:
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
     #show_index(message)
-    print 'mensagrm'
-    print message
-
+    
     present_in_list = check_index_recive(message,list_of_index)
 
     if(present_in_list==0):
@@ -112,7 +114,7 @@ while 1:
 	    #Save the message
 	    #-3 is to find the message in the vector based in the end.
 	    list_of_message.append(message[len(message)-3])
-
+	    
 	    #Create the answer to send to client
 	    respost = create_respost(message,'0')
 
@@ -133,14 +135,17 @@ while 1:
 	    	#If the value is -1, show error to user
 	    	if(check== -1):
 	    		print 'Erro, the message is not completed'
-	    	clean_lists(list_of_index,list_of_message,list_of_ack)
+	    	#clean_lists(list_of_index,list_of_message,list_of_ack)
+
+	    	list_of_message = []
+	    	list_of_ack=[]
+	    	list_of_index=[]
     else:
 
     	respost = create_respost(message,'0')
 
     	if(message[len(message)-1] == '0'):
 	    	#Show the complete message
-	    	print list_of_message
 	    	last = int(message[0])
 
 	    	#Check recive the value of status on fuction
@@ -150,6 +155,10 @@ while 1:
 	    	if(check== -1):
 	    		print 'Erro, the message is not completed'
 
-	    	clean_lists(list_of_index,list_of_message,list_of_ack)	
+	    	#clean_lists(list_of_index,list_of_message,list_of_ack)	
 
-    serverSocket.sendto(respost, clientAddress)
+	    	
+	    	list_of_message = []
+	    	list_of_ack=[]
+	    	list_of_index=[]
+    serverSocket.sendto(respost, clientAddress)	

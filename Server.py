@@ -16,6 +16,16 @@ def create_respost(message,valid):
 
 	return ack
 
+def check_index_recive(message,list):
+
+	status = 0
+	for i in range(0,len(list)):
+		index=int(list[i])
+		if(message[0]==index):
+			status = -1
+
+	return status
+
 #This fuction is used to see the valid of index's list	
 def check_list_index(list,size):
 
@@ -56,31 +66,48 @@ while 1:
 	#Recive the message from cliente
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
-    show_index(message)
+    #show_index(message)
 
-    #Save the index
-    list_of_index.append(message[0])
+    present_in_list = check_index_recive(message,list_of_index)
 
-    #Save the message
-    list_of_message.append(message[2])
+    if(present_in_list==0):
+	    #Save the index
+	    list_of_index.append(message[0])
 
-    #Create the answer to send to client
-    respost = create_respost(message,'0')
+	    #Save the message
+	    list_of_message.append(message[2])
 
-    #Save the ack before is send
-    list_of_ack.append(respost)
+	    #Create the answer to send to client
+	    respost = create_respost(message,'0')
 
-    #If was the last package
-    if(message[len(message)-1] == '0'):
-    	#Show the complete message
-    	print list_of_message
-    	last = int(message[0])
+	    #Save the ack before is send
+	    list_of_ack.append(respost)
 
-    	#Check recive the value of status on fuction
-    	check =check_list_index(list_of_index,last)	
-    	
-    	#If the value is -1, show error to user
-    	if(check== -1):
-    		print 'Erro, the message is not completed'
-        	
+	    #If was the last package
+	    if(message[len(message)-1] == '0'):
+	    	#Show the complete message
+	    	print list_of_message
+	    	last = int(message[0])
+
+	    	#Check recive the value of status on fuction
+	    	check =check_list_index(list_of_index,last)	
+	    	
+	    	#If the value is -1, show error to user
+	    	if(check== -1):
+	    		print 'Erro, the message is not completed'
+    else:
+
+    	respost = create_respost(message,'0')
+    	if(message[len(message)-1] == '0'):
+	    	#Show the complete message
+	    	print list_of_message
+	    	last = int(message[0])
+
+	    	#Check recive the value of status on fuction
+	    	check =check_list_index(list_of_index,last)	
+	    	
+	    	#If the value is -1, show error to user
+	    	if(check== -1):
+	    		print 'Erro, the message is not completed'
+
     serverSocket.sendto(respost, clientAddress)

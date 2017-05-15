@@ -15,46 +15,23 @@ def create_respost(message,valid):
 
 	new_list = message.split()
 
-
 	ack = new_list[0]+' '+valid
 
-
 	return ack
-
-#Criar o caso geral
-def return_value(message):
-
-	size = len(message)
-	size = size - 4
-
-def clean_lists(index,msg,ack):
-	index = []
-	msg = []
-	ack = []
-
-	print 'limpando listas'
-	print index
-	print msg
-	print ack
-
+#This fuction is going to look if the index exists in list
 def check_index_recive(message,list):
 
 	status = 0
 	valor = -1
-	#create the general case
-	size = len(message)-5
+	
+	list_aux =[]
+	list_aux = message.split()
 
 	if(len(list)!= 0):
-		
 		for i in range(0,len(list)):
-			index=int(list[i])
-			if(len(message)==5):
-				valor = int(message[0])
 
-			if(len(message)==6):
-				valor = int(message[1])
-				valor_aux = int(message[0])
-				valor = valor + 10*valor_aux	
+			index=int(list[i])
+			valor = list_aux[0]
 			
 			if(valor==index):
 				status = -1
@@ -137,6 +114,7 @@ while 1:
 	    		print 'Erro, the message is not completed'
 	    	#clean_lists(list_of_index,list_of_message,list_of_ack)
 
+	    	#Clean al lists
 	    	list_of_message = []
 	    	list_of_ack=[]
 	    	list_of_index=[]

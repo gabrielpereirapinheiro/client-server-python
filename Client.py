@@ -23,8 +23,11 @@ def message_assembler(input_string, string_size):
 #Funcao que vai retornar o valor do ACK e o valor da variavel de validacao do pacote
 #Vai retornar o ack do pacote e o valor de validacao
 def message_disassembler(received_message):
-	rcv_ack = int(received_message[0]) # o primeiro elemento da mensagem eh o ack
-	rcv_validation = int(received_message[2]) # o ultimo elemento da mensagem eh o valor de validacao
+	list_substring = [] # vai receber todas as substring que tem na mensagem
+	list_substring = received_message.split()
+	print list_substring[0], list_substring[1]
+	rcv_ack = int(list_substring[0]) # o primeiro elemento da mensagem eh o ack
+	rcv_validation = int(list_substring[1]) # o ultimo elemento da mensagem eh o valor de validacao
 
 	return rcv_ack, rcv_validation
 
@@ -57,13 +60,13 @@ def main():
 				#colocar aqui a logica do timeout
 				for i in range(window_base, window_max):
 					seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
-					print message_list[i]
 					clientSocket.sendto(message_list[i],(serverName, serverPort)) 
 
 			
 			received_message, serverAddress = clientSocket.recvfrom(2048)
 			#print received_message
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
+			#print ack
 			#se tiver tido erro, coloca ack na fila de nacks, senao coloca ack na fila de ack
 			if rcv_validation == -1:
 				queue_nack.append(ack) # colocar na fila qualquer ack que nao foi recebido
@@ -86,7 +89,6 @@ def main():
 
 			if window_max > msg_size:
 				window_max = msg_size
-				print 'max',window_max
 
 	
 

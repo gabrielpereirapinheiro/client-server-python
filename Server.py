@@ -97,7 +97,7 @@ while 1:
 	    		print 'Erro, the message is not completed'
     else:
 
-    	respost = create_respost(message,'0')
+    	respost = create_respost(message,'-1')
     	if(message[len(message)-1] == '0'):
 	    	#Show the complete message
 	    	print list_of_message
@@ -108,6 +108,7 @@ while 1:
 	    	
 	    	#If the value is -1, show error to user
 	    	if(check== -1):
-	    		print 'Erro, the message is not completed'
+	    		print 'Error, the message is not completed'
+
 
     serverSocket.sendto(respost, clientAddress)

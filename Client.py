@@ -51,7 +51,7 @@ def main():
 	
 	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
 	#para testar casos de perda
-	destroy_message = -1 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+	destroy_message = 2 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
 						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
@@ -68,6 +68,7 @@ def main():
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
 					if i == destroy_message and i < window_max-1:
+						destroy_message = -1
 						continue
 
 					seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote

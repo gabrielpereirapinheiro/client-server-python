@@ -23,15 +23,17 @@ def create_respost(message,list_msg):
 
 	valor = int(valor)
 	
+	retorno = new_list[0]
+
 	if(size>0):				
 		valor = int(valor)
 		aux = int(list_msg[size-1])
 		
 		if(valor-1 != aux):
 			valid = '-1'
-
-	ack = new_list[0]+' '+valid
-
+			retorno=aux +1 
+			retorno = str(retorno)
+	ack = retorno+' '+valid
 	return ack
 #This fuction is going to look if the index exists in list
 def check_index_recive(message,list):
@@ -58,21 +60,6 @@ def check_list_index(list,size):
 
 	#if dont have problems with the list, status=0
 	status = 0
-	print
-	if (size!=0):
-
-		#all vector
-		for i in range (0,size+1):
-			#to see if not the last one
-			if (i!= size):
-				#convert char to int
-				x = int(list[i])
-				y = int(list[i+1])
-				#if the actual + 1 not is the next
-				if(x+1 != y):
-					#define status = -1 to report erro
-					status= -1
-
 	# 0 means ok and -1 means erro			
 	return status 
 
@@ -102,7 +89,7 @@ while 1:
     present_in_list = check_index_recive(message,list_of_index)
     aux_list = message.split()
     #print aux_list[0]
-
+    print aux_list
     if(present_in_list==0):
 
 	 

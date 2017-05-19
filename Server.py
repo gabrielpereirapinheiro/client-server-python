@@ -4,8 +4,7 @@ from socket import *
 #Victor Araujo Vieira - 140032801
 #Gabriel Pereira Pinheiro - 140020764
 
-
-#Fuction to show how index was recived from Client.py
+#Funcão que mostra na tela index recebido
 def show_index(message):
 	print 'Was recived the index ->'
 	print message[0]

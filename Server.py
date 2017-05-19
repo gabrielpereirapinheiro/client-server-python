@@ -4,28 +4,39 @@ from socket import *
 #Victor Araujo Vieira - 140032801
 #Gabriel Pereira Pinheiro - 140020764
 
-#Funcão que mostra na tela index recebido
-def show_index(message):
-	print 'Was recived the index ->'
-	print message[0]
+#Funcao que mostra na tela index recebido
 
-#This fuction going to create the ack + valid
+def show_index(message):
+	print ''
+	print '  I    M    T'
+
+#Funcao que ira criar a respostar(ACK)
+#que e a concatenacao do indice + ' ' + validade
 def create_respost(message,list_msg):
 
+	#Lista vazia para usar split
 	new_list = []
-	
+
+	#Inicialmente igual a 0
 	valid = '0'
+
+	#new_list com mensagem recebida do cliente
 	new_list = message.split()
+
+	#tamanho da listas com as mensagens ja recebidas
 	size = len(list_msg)
 
+	#Indice recevido
 	valor = new_list[0]
 
+	#Inteiro recebido
 	valor = int(valor)
-	
+
+	#Caracter recebido
 	retorno = new_list[0]
 
-	if(size>0):				
-		valor = int(valor)
+	#Se a lista nao e nula
+	if(size>0):
 		aux = int(list_msg[size-1])
 		
 		if(valor-1 != aux):
@@ -83,7 +94,7 @@ while 1:
 	#Recive the message from cliente
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
-    #show_index(message)
+    show_index(message)
    	
     present_in_list = check_index_recive(message,list_of_index)
     aux_list = message.split()

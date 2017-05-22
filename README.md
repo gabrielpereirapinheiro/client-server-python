@@ -1,5 +1,6 @@
 # tr2_socket
 Trabalho da disciplina de Teleinformatica e Redes 2 - SOCKET
+Link GitHub: https://github.com/gabrielpereirapinheiro/tr2_socket
 
 Alunos : GABRIEL PEREIRA PINHEIRO - 140020764
          VICTOR ARAUJO VIEIRA - 140032801

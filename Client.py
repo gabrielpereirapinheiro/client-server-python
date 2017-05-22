@@ -40,7 +40,7 @@ def main():
 	msg_size = len(message) # tamanho da string digitada
 
 	# Declaracao das variaveis de controle do GBN
-	window_size = 3 # o tamanho da janela eh variavel, precisa mudar o valor aqui
+	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
 	window_base = 0
 	window_max = window_size
@@ -51,7 +51,7 @@ def main():
 	
 	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
 	#para testar casos de perda
-	destroy_message = -1 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+	destroy_message = 2 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
 						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
@@ -98,6 +98,7 @@ def main():
 				window_base = ack
 				window_max = ack + window_size
 			else:
+				#parte que vai deslocar a janela
 				window_max += (ack+1 - window_base)
 				window_base = ack + 1
 

@@ -6,10 +6,18 @@ from socket import *
 
 #Funcao que mostra na tela index recebido
 
-def show_index(message):
+def show_index(message,aux):
+	print 'Foi recebido a mensagem-> ',message[len(message)-3]
+	print 'index -> ',aux[0]
+	if(len(aux)==3):
+		print 'flag -> ',aux[2]
+		if(aux[2]=='0'):
+			print 'Ultimo pacote recebido'
+	if(len(aux)==2):
+		print 'flag -> ',aux[1]
+		if(aux[1]=='0'):
+			print 'Ultumo pacote recebido'		
 	print ''
-	print '  I    M    T'
-
 #Funcao que ira criar a respostar(ACK)
 #que e a concatenacao do indice + ' ' + validade
 def create_respost(message,list_msg):
@@ -78,6 +86,7 @@ serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind(('', serverPort))
 
 print 'The server is ready to receive'
+print ''
 
 #Create a new list to save all message receved
 list_of_message = []
@@ -94,12 +103,13 @@ while 1:
 	#Recive the message from cliente
     message, clientAddress = serverSocket.recvfrom(2048)
    	#Show on terminal the index
-    show_index(message)
+    
    	
     present_in_list = check_index_recive(message,list_of_index)
     aux_list = message.split()
+    show_index(message,aux_list)    
     #print aux_list[0]
-    print aux_list
+    
     if(present_in_list==0):
 
 	 

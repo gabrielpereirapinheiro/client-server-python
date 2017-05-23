@@ -9,7 +9,10 @@ from socket import *
 def show_index(message,aux):
 	print 'Foi recebido a mensagem-> ',message[len(message)-3]
 	print 'index -> ',aux[0]
-	print 'flag -> ',aux[2]
+	if(len(aux)==3):
+		print 'flag -> ',aux[2]
+	if(len(aux)==2):
+		print 'flag -> ',aux[1]	
 	print ''
 #Funcao que ira criar a respostar(ACK)
 #que e a concatenacao do indice + ' ' + validade

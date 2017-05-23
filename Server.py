@@ -18,9 +18,9 @@ def show_index(message,aux):
 		if(aux[1]=='0'):
 			print '------Ultumo pacote recebido------'		
 	print ''
-#Funcao que ira criar a respostar(ACK)
+#Funcao que ira criar a respostaar(ACK)
 #que e a concatenacao do indice + ' ' + validade
-def create_respost(message,list_msg,flag):
+def create_resposta(message,list_msg,flag):
 
 	#Lista vazia para usar split
 	new_list = []
@@ -93,13 +93,12 @@ serverSocket.bind(('', serverPort))
 print 'O servidor esta pronto para receber !'
 print ''
 
-#Create a new list to save all message receved
+
 list_of_message = []
 
-#Create a new list to save the index
 list_of_index = []
 
-#Create a new list to save the acks was envied
+#Create a new list to save the acks that were sent
 list_of_ack = []
 
 aux_list = []
@@ -119,11 +118,11 @@ while 1:
 
 	 
 	    #Create the answer to send to client
-	    respost = create_respost(message,list_of_index,0)
+	    resposta = create_resposta(message,list_of_index,0)
 
-	    status_respost = respost[len(respost)-1]
+	    status_resposta = resposta[len(resposta)-1]
 
-	    if(status_respost== '0'):
+	    if(status_resposta== '0'):
 		    
 
 	       #Save the index
@@ -135,11 +134,12 @@ while 1:
 		    
 		    
 		    #Save the ack before is send
-		    list_of_ack.append(respost)
+		    list_of_ack.append(resposta)
 
 		    #print 'valor --->'+ message[len(message)-1]
 
-		    last_index = message[0]
+		    #last_index = message[0]
+
 		    #If was the last package
 		    if(message[len(message)-1] == '0'):
 		    	#Show the complete message
@@ -163,7 +163,7 @@ while 1:
 		    	list_of_index=[]
 	    else:
 
-	    	respost = create_respost(message,list_of_index,1)
+	    	resposta = create_resposta(message,list_of_index,1)
 
 	    	if(message[len(message)-1] == '0'):
 		    	#Show the complete message
@@ -182,4 +182,5 @@ while 1:
 		    	list_of_ack=[]
 		    	list_of_index=[]
 
-    serverSocket.sendto(respost, clientAddress)	
+    serverSocket.sendto(resposta, clientAddress)	
+    print resposta

@@ -1,4 +1,6 @@
 from socket import *
+import time
+import timeit
 #CLIENT
 #Victor Araujo Vieira - 140032801
 #Gabriel Pereira Pinheiro - 140020764
@@ -54,7 +56,7 @@ def main():
 	
 	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
 	#para testar casos de perda
-	destroy_message = -1 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+	destroy_message = 1  #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
 						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
@@ -71,19 +73,23 @@ def main():
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
 					if i == destroy_message:
+						if destroy_message == window_max-1:
+							print 'Timeout excedido!'
 						destroy_message = -1
 					else:
 						seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
 						print 'Esta sendo enviado o pacote:', message_list[i]
+						#start = timeit.default_timer()
+						time.sleep(1)
 						clientSocket.sendto(message_list[i],(serverName, serverPort))
 
 				print 'Pacotes de', window_base, 'ao', window_max-1, 'enviados'
 
-
 			received_message, serverAddress = clientSocket.recvfrom(2048)
 			print 'Mensagem recebida do servidor:', received_message
+			#stop = timeit.default_timer()
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
-			
+			#print stop - start
 			#se tiver tido erro, coloca ack na fila de nacks
 			if rcv_validation == -1:
 				queue_nack.append(ack) # colocar na fila qualquer ack que nao foi recebido

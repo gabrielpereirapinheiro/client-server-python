@@ -51,7 +51,10 @@ def create_respost(message,list_msg):
 			valid = '-1'
 			retorno=aux +1 
 			retorno = str(retorno)
+			print 'Mensagem do index ',valor,' descartada'
+			
 	ack = retorno+' '+valid
+
 	return ack
 #This fuction is going to look if the index exists in list
 def check_index_recive(message,list):
@@ -85,7 +88,7 @@ serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind(('', serverPort))
 
-print 'The server is ready to receive'
+print 'O servidor esta pronto para receber !'
 print ''
 
 #Create a new list to save all message receved

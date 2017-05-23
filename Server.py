@@ -20,7 +20,7 @@ def show_index(message,aux):
 	print ''
 #Funcao que ira criar a respostar(ACK)
 #que e a concatenacao do indice + ' ' + validade
-def create_respost(message,list_msg):
+def create_respost(message,list_msg,flag):
 
 	#Lista vazia para usar split
 	new_list = []
@@ -51,8 +51,10 @@ def create_respost(message,list_msg):
 			valid = '-1'
 			retorno=aux +1 
 			retorno = str(retorno)
-			print 'Mensagem do index ',valor,' descartada'
-			
+			if(flag==0):
+				print '----- Mensagem do index',valor,'descartada-----'
+				print ''
+
 	ack = retorno+' '+valid
 
 	return ack
@@ -117,7 +119,7 @@ while 1:
 
 	 
 	    #Create the answer to send to client
-	    respost = create_respost(message,list_of_index)
+	    respost = create_respost(message,list_of_index,0)
 
 	    status_respost = respost[len(respost)-1]
 
@@ -141,7 +143,8 @@ while 1:
 		    #If was the last package
 		    if(message[len(message)-1] == '0'):
 		    	#Show the complete message
-		    	print list_of_message
+		    	print ''
+		    	print 'A mensagem completa recebida foi -> ',list_of_message
 
 		    	last = int(message[0])
 
@@ -160,7 +163,7 @@ while 1:
 		    	list_of_index=[]
 	    else:
 
-	    	respost = create_respost(message,list_of_index)
+	    	respost = create_respost(message,list_of_index,1)
 
 	    	if(message[len(message)-1] == '0'):
 		    	#Show the complete message

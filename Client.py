@@ -40,7 +40,7 @@ def main():
 	msg_size = len(message) # tamanho da string digitada
 
 	# Declaracao das variaveis de controle do GBN
-	window_size = 3 # o tamanho da janela eh variavel, precisa mudar o valor aqui
+	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
 	window_base = 0
 	#se o tamanho da mensagem for menor que o tamanho da janela, o tamanho maximo da janela deve ser o tamanho da mensagem
@@ -54,7 +54,7 @@ def main():
 	
 	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
 	#para testar casos de perda
-	destroy_message = 4 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+	destroy_message = -1 #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
 						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
@@ -66,8 +66,7 @@ def main():
 			
 			if window_base == seq_number:
 				#colocar aqui a logica do timeout
-				print '\n'
-				queue_ack = [] # sempre inicializa a fila de acks
+				print '--------------------------------------------'
 				for i in range(window_base, window_max):
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
@@ -76,7 +75,7 @@ def main():
 					else:
 						seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
 						print 'Esta sendo enviado o pacote:', message_list[i]
-						clientSocket.sendto(message_list[i],(serverName, serverPort)) 
+						clientSocket.sendto(message_list[i],(serverName, serverPort))
 
 				print 'Pacotes de', window_base, 'ao', window_max-1, 'enviados'
 

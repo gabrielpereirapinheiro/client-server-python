@@ -37,14 +37,17 @@ def main():
 	serverPort = 12000
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
 	message = raw_input('Insira uma mensagem: ')
-	print '\n'
 	msg_size = len(message) # tamanho da string digitada
 
 	# Declaracao das variaveis de controle do GBN
 	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
 	window_base = 0
-	window_max = window_size - 1
+	#se o tamanho da mensagem for menor que o tamanho da janela, o tamanho maximo da janela deve ser o tamanho da mensagem
+	if msg_size > window_size:
+		window_max = window_size - 1
+	else:
+		window_max = msg_size - 1
 	next_ack = 0 # o ack que o cliente espera
 	ack = 0 # o ack sempre comeca com 0, na medida que o algoritmo roda, que ele sera incrementado
 	nack = 0 # inicializando o nack como 0

@@ -11,8 +11,12 @@ def show_index(message,aux):
 	print 'index -> ',aux[0]
 	if(len(aux)==3):
 		print 'flag -> ',aux[2]
+		if(aux[2]=='0'):
+			print 'Ultimo pacote recebido'
 	if(len(aux)==2):
-		print 'flag -> ',aux[1]	
+		print 'flag -> ',aux[1]
+		if(aux[1]=='0'):
+			print 'Ultumo pacote recebido'		
 	print ''
 #Funcao que ira criar a respostar(ACK)
 #que e a concatenacao do indice + ' ' + validade

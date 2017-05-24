@@ -84,7 +84,7 @@ def main():
 				for i in range(window_base, window_max):
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
-					print destroy_message 
+					
 					if i == destroy_message:
 					
 						if destroy_message == window_max-1:

@@ -40,19 +40,28 @@ def main():
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
 	message = raw_input('Digite a mensagem a ser enviada: ')
 	msg_size = len(message) # tamanho da string digitada
-	print ''
-	print 'Escolha uma mensagem para ser destruida antes do envio ( de 0 a',len(message)-1,')	'
-	print '**Digite -1 para nao destruir nenhuma**'
+	print '\nEscolha uma mensagem para ser destruida antes do envio ( de 0 a',len(message)-1,')	'
+	print '** Digite -1 para nao destruir nenhuma **'
 	escolha = raw_input('->')
+	print '\n Escolha o tamanho da janela ( de 0 a ',len(message)-1,')'
+	print '** Digite -1 para tamanho padrao (4) **'
+	tamanho_janela = raw_input('->')
+	if(int(tamanho_janela)==-1):
+		tamanho_janela = 4
+	else:
+		tamanho_janela = int(tamanho_janela)
+	
 	# Declaracao das variaveis de controle do GBN
-	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
+	window_size = tamanho_janela # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
 	window_base = 0
 	#se o tamanho da mensagem for menor que o tamanho da janela, o tamanho maximo da janela deve ser o tamanho da mensagem
+
 	if msg_size > window_size:
 		window_max = window_size
 	else:
 		window_max = msg_size - 1
+		
 	ack = 0 # o ack sempre comeca com 0, na medida que o algoritmo roda, que ele sera incrementado
 	nack = 0 # inicializando o nack como 0
 	queue_nack = [] # vai ser a fila que contera os NACKS recebidos

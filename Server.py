@@ -97,9 +97,7 @@ serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind(('', serverPort))
 
-print '-----O servidor esta pronto para receber -----'
-print ''
-
+print '-----O servidor esta pronto para receber -----\n'
 
 list_of_message = []
 
@@ -151,12 +149,11 @@ while 1:
 		    #If was the last package
 		    if(message[len(message)-1] == '0'):
 		    	#Show the complete message
-		    	print ''
+		    	
 		    	mensagem_completa=junta_messagem(list_of_message)
-		    	print 'A mensagem recebida foi ->',mensagem_completa,' <-'
-		    	print ''
-		    	print '----- O servidor esta pronota para receber -----'
-		    	print ''
+		    	print '\nA mensagem recebida foi ->',mensagem_completa,' <-'
+		    	print '\n----- O servidor esta pronota para receber -----\n'
+		    	
 
 		    	last = int(message[0])
 

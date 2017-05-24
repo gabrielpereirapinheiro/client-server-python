@@ -40,6 +40,7 @@ def main():
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
 	message = raw_input('Digite a mensagem a ser enviada: ')
 	msg_size = len(message) # tamanho da string digitada
+	print ''
 	print 'Escolha uma mensagem para ser destruida antes do envio ( de 0 a',len(message)-1,')	'
 	print '**Digite -1 para nao destruir nenhuma**'
 	escolha = raw_input('->')
@@ -83,7 +84,7 @@ def main():
 					else:
 						seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
 						print 'Esta sendo enviado o pacote:', message_list[i]
-						#start = timeit.default_timer()
+						start = timeit.default_timer()
 						time.sleep(1)
 						clientSocket.sendto(message_list[i],(serverName, serverPort))
 
@@ -91,7 +92,7 @@ def main():
 
 			received_message, serverAddress = clientSocket.recvfrom(2048)
 			print 'Mensagem recebida do servidor:', received_message
-			#stop = timeit.default_timer()
+			stop = timeit.default_timer()
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
 			#print stop - start
 			#se tiver tido erro, coloca ack na fila de nacks

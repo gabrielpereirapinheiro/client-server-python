@@ -4,7 +4,7 @@ from socket import *
 #Victor Araujo Vieira - 140032801
 #Gabriel Pereira Pinheiro - 140020764
 
-#Funcao que mostra na tela index recebido
+#Funcao que mostra na tela o que foi recebido
 
 def show_index(message,aux):
 	print 'Foi recebido a mensagem-> ',message[len(message)-3]
@@ -84,13 +84,20 @@ def check_list_index(list,size):
 	#if dont have problems with the list, status=0
 	status = 0
 	# 0 means ok and -1 means erro			
-	return status 
+	return status
+def junta_messagem(lista_de_messagens):
+	
+	string = ' '
+
+	for i in range (0,len(lista_de_messagens)):
+		string = string + str(lista_de_messagens[i]) 
+	return string
 
 serverPort = 12000
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind(('', serverPort))
 
-print 'O servidor esta pronto para receber !'
+print '-----O servidor esta pronto para receber -----'
 print ''
 
 
@@ -122,6 +129,7 @@ while 1:
 
 	    status_resposta = resposta[len(resposta)-1]
 
+	    #Se for um ack
 	    if(status_resposta== '0'):
 		    
 
@@ -144,7 +152,11 @@ while 1:
 		    if(message[len(message)-1] == '0'):
 		    	#Show the complete message
 		    	print ''
-		    	print 'A mensagem completa recebida foi -> ',list_of_message
+		    	mensagem_completa=junta_messagem(list_of_message)
+		    	print 'A mensagem recebida foi ->',mensagem_completa,' <-'
+		    	print ''
+		    	print '----- O servidor esta pronota para receber -----'
+		    	print ''
 
 		    	last = int(message[0])
 
@@ -161,6 +173,7 @@ while 1:
 		    	list_of_message = []
 		    	list_of_ack=[]
 		    	list_of_index=[]
+		# Se for um NACK    	
 	    else:
 
 	    	resposta = create_resposta(message,list_of_index,1)
@@ -183,4 +196,4 @@ while 1:
 		    	list_of_index=[]
 
     serverSocket.sendto(resposta, clientAddress)	
-    print resposta
+   

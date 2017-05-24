@@ -40,7 +40,9 @@ def main():
 	clientSocket = socket(AF_INET, SOCK_DGRAM)
 	message = raw_input('Digite a mensagem a ser enviada: ')
 	msg_size = len(message) # tamanho da string digitada
-
+	print 'Escolha uma mensagem para ser destruida antes do envio ( de 0 a',len(message)-1,')	'
+	print '**Digite -1 para nao destruir nenhuma**'
+	escolha = raw_input('->')
 	# Declaracao das variaveis de controle do GBN
 	window_size = 4 # o tamanho da janela eh variavel, precisa mudar o valor aqui
 	seq_number = 0
@@ -56,7 +58,7 @@ def main():
 	
 	#Variavel que vai 'destruir' a mensagem criada, ou seja, vai fazer com que nao seja entregue ao servidor, 
 	#para testar casos de perda
-	destroy_message = 1  #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
+	destroy_message = int(escolha)  #inicializa a variavel de destruir a mensagem como -1. Se quiser destruir alguma, 
 						 #deve mudar aqui
 
 	message_list = message_assembler(message, msg_size) # vai criar a lista de mensagens que serao enviadas
@@ -72,7 +74,9 @@ def main():
 				for i in range(window_base, window_max):
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
+					
 					if i == destroy_message:
+					
 						if destroy_message == window_max-1:
 							print 'Timeout excedido!'
 						destroy_message = -1

@@ -193,4 +193,5 @@ while 1:
 		    	list_of_index=[]
 
     serverSocket.sendto(resposta, clientAddress)	
+    print resposta
    

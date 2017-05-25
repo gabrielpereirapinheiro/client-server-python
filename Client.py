@@ -32,6 +32,11 @@ def message_disassembler(received_message):
 
 	return rcv_ack, rcv_validation
 
+def mostra_recebido(lista):
+	if(lista[1]=='-1'):
+		print 'Foi recebido o NACK do indice ',lista[0]
+	else:
+		print 'Foi recebido o ACK do indice  ',lista[0]
 
 
 def main():
@@ -80,7 +85,7 @@ def main():
 			
 			if window_base == seq_number:
 				#colocar aqui a logica do timeout
-				print '--------------------------------------------'
+				print '\n--------------------------------------------'
 				for i in range(window_base, window_max):
 					# se o i for igual a mensagem que quer ser destruida, continua o loop, assim n executa o
 					#envio da mensagem
@@ -100,7 +105,14 @@ def main():
 				print 'Pacotes de', window_base, 'ao', window_max-1, 'enviados'
 
 			received_message, serverAddress = clientSocket.recvfrom(2048)
-			print 'Mensagem recebida do servidor:', received_message
+
+			lista = []
+
+			lista = received_message.split()
+
+			mostra_recebido(lista)
+
+			#print 'Mensagem recebida do servidor:', received_message
 			stop = timeit.default_timer()
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
 			#print stop - start

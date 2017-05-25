@@ -98,7 +98,6 @@ def main():
 					else:
 						seq_number += 1 # sequence number eh incrementado a cada vez que eh enviado um pacote
 						print 'Esta sendo enviado o pacote:', message_list[i]
-						start = timeit.default_timer()
 						time.sleep(1)
 						clientSocket.sendto(message_list[i],(serverName, serverPort))
 
@@ -113,7 +112,6 @@ def main():
 			mostra_recebido(lista)
 
 			#print 'Mensagem recebida do servidor:', received_message
-			stop = timeit.default_timer()
 			ack, rcv_validation = message_disassembler(received_message) # pega o ack recebido e se n teve erro
 			#print stop - start
 			#se tiver tido erro, coloca ack na fila de nacks

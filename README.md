@@ -9,7 +9,5 @@ Para executar, basta abrir dois terminais na pasta dos programas, e:
 	1. Em um executar o comando python Server.py
 	2. No outro executar o comando python Client.py
 
-Se quiser mudar o tamanho da janela ou o pacote a ser destruido no Client, tem que mudar as variaveis window_size e destroy_message, respectivamente. 
-
 Se quiser terminar o servidor, basta digitar ctrl C no terminal.
 

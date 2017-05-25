@@ -48,7 +48,7 @@ def main():
 	print '\nEscolha uma mensagem para ser destruida antes do envio ( de 0 a',len(message)-1,')	'
 	print '** Digite -1 para nao destruir nenhuma **'
 	escolha = raw_input('->')
-	print '\n Escolha o tamanho da janela ( de 0 a ',len(message),')'
+	print '\n Escolha o tamanho da janela ( de 0 a ',len(message)-1,')'
 	print '** Digite -1 para tamanho padrao (4) **'
 	tamanho_janela = raw_input('->')
 	if(int(tamanho_janela)==-1):

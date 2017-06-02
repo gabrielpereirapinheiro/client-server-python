@@ -4,15 +4,15 @@ ________________________________________________________________________________
 
 ### Developers:
 
-GABRIEL PEREIRA PINHEIRO - 140020764
+- GABRIEL PEREIRA PINHEIRO - 140020764
 
-VICTOR ARAUJO VIEIRA - 140032801
+- VICTOR ARAUJO VIEIRA - 140032801
 
 ### Email :
 
-gabriel.pereira.pinheiro@gmail.com
+- gabriel.pereira.pinheiro@gmail.com
 
-icevct@gmail.com
+- icevct@gmail.com
 
 __________________________________________________________________________________________________________________________________________
 

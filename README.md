@@ -1,13 +1,28 @@
-# tr2_socket
-Trabalho da disciplina de Teleinformatica e Redes 2 - SOCKET
-Link GitHub: https://github.com/gabrielpereirapinheiro/tr2_socket
+# University of Brasilia (UnB)
 
-Alunos : GABRIEL PEREIRA PINHEIRO - 140020764
-         VICTOR ARAUJO VIEIRA - 140032801
+___________________________________________________________________________________________________________________________________________
 
-Para executar, basta abrir dois terminais na pasta dos programas, e:
-	1. Em um executar o comando python Server.py
-	2. No outro executar o comando python Client.py
+### Developers:
 
-Se quiser terminar o servidor, basta digitar ctrl C no terminal.
+GABRIEL PEREIRA PINHEIRO - 140020764
+VICTOR ARAUJO VIEIRA - 140032801
 
+### Email :
+
+gabriel.pereira.pinheiro@gmail.com
+icevct@gmail.com
+
+__________________________________________________________________________________________________________________________________________
+
+### How to execute :
+
+To execute this program, you just need to open two terminals on the paste of files and execute the command :
+
+> $ python Server.py
+
+And in the second terminal execute :
+
+> $ python Client.py
+
+
+If you want finish the server, use ```CTRL``` + ```C``` in the terminal.

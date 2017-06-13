@@ -4,9 +4,9 @@ ________________________________________________________________________________
 
 ### Developers:
 
-- GABRIEL PEREIRA PINHEIRO - 140020764
+- GABRIEL PEREIRA PINHEIRO 
 
-- VICTOR ARAUJO VIEIRA - 140032801
+- VICTOR ARAUJO VIEIRA
 
 ### Email :
 

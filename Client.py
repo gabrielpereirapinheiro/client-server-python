@@ -2,8 +2,8 @@ from socket import *
 import time
 import timeit
 #CLIENT
-#Victor Araujo Vieira - 140032801
-#Gabriel Pereira Pinheiro - 140020764
+#Victor Araujo Vieira 
+#Gabriel Pereira Pinheiro
 
 #Funcao que dada a string que o usuario digitou e que vai ser enviada para o servidor, vai montar uma nova
 #string com os a seguinte caracteristica: id caracter flag

@@ -1,8 +1,8 @@
 from socket import *
 
 #SERVER
-#Victor Araujo Vieira - 140032801
-#Gabriel Pereira Pinheiro - 140020764
+#Victor Araujo Vieira 
+#Gabriel Pereira Pinheiro
 
 #Funcao que mostra na tela o que foi recebido
 

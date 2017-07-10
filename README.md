@@ -4,11 +4,13 @@ ________________________________________________________________________________
 
 ### Developers:
 
-- GABRIEL PEREIRA PINHEIRO 
+- [Gabriel Pereira Pinheiro](https://github.com/gabrielpereirapinheiro) 
 
-- VICTOR ARAUJO VIEIRA
+- [Victor Araujo Vieira](https://github.com/IceVct)
 
-__________________________________________________________________________________________________________________________________________
+### About :
+
+- It's a implemation of [TCP procotol](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) using python . 
 
 ### How to execute :
 
@@ -21,3 +23,6 @@ ________________________________________________________________________________
 > $ python Client.py
 
 - If you want finish the server, use ```CTRL``` + ```C``` in the terminal.
+
+
+

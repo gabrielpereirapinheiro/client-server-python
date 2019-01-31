@@ -1,7 +1,5 @@
 # Server and Client in Python
 
-___________________________________________________________________________________________________________________________________________
-
 ### About :
 
 - It's a implemation of [TCP procotol](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) using python . 

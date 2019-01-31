@@ -2,12 +2,6 @@
 
 ___________________________________________________________________________________________________________________________________________
 
-### Developers:
-
-- [Gabriel Pereira Pinheiro](https://github.com/gabrielpereirapinheiro) 
-
-- [Victor Araujo Vieira](https://github.com/IceVct)
-
 ### About :
 
 - It's a implemation of [TCP procotol](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) using python . 
